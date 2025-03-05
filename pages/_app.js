@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import 'prismjs/themes/prism-tomorrow.css';
 
-function MyApp({ Component, pageProps }) {
+function Blog({ Component, pageProps }) {
   return (
     <>
       <span className="theme-bejamas" />
@@ -10,4 +10,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default Blog;

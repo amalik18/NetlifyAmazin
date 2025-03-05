@@ -1,0 +1,129 @@
+---
+type: Post
+title: Computer Networks 101 (#2) 
+description: "For this weeks post we'll be taking a deep dive in to computer networks. Specifically the OSI and TCP/IP stacks and how it relates to modern networking."
+date: '2024-09-17'
+---
+
+Hey folks, I’m back with this weeks post. This week we’ll be taking a deep dive in to Computer Networks. More specifically, I’ll do a deep dive in to the [OSI model](https://en.wikipedia.org/wiki/OSI_model) and comparing it to the [TCP/IP model](https://en.wikipedia.org/wiki/Internet_protocol_suite). My goal is to provide a comprehensive explanation for each layer of the model while also providing concrete examples to help visualize the entire process.
+
+*Note: I am not an artist so I’ll be leveraging graphics from various sources. The references will be in each image’s caption.*
+
+Before we get started, I'd like to thank everyone for tuning in. A special shout-out to all of our subscribers—in just one short week, we're up to 11 subscribers! I appreciate each and every one of you for your support. Now, on to the regularly scheduled program…
+
+---
+Computer networks are crucial to understand if you’re a software developer or work in the technology space at all. They are the backbone of everything we do online, whether it’s sending an email, posting on social media, or watching Netflix. At the heart of it, a computer network allows devices to communicate and share resources, enabling the seamless exchange of information across vast distances.
+
+To understand computer networks, there are two popular models that provide insight into how networks operate: the **OSI Model** and the **TCP/IP Model**.
+
+# What is the OSI Model?
+The Open Systems Interconnection (OSI) model is a conceptual framework created by the International Organization for Standardization (ISO) that details how data travels over a network. This is done by outlining seven distinct layers. It’s become the primary mode of teaching and discussing the various networking processes. By the way, OSI being created by ISO…the irony.
+
+# What is the TCP/IP Model?
+
+In contrast to the OSI model, the TCP/IP Model is a more practical representation of how devices connect and communicate across networks. It's the foundation of the internet and is a bit simpler than the OSI model, with fewer layers to remember.
+
+Below is a graphic (courtesy of the [ByteByteGo Newsletter](https://open.substack.com/pub/bytebytego)
+) that showcases the very differences in the layers of the OSI model vs. the TCP/IP model. 
+
+<img src="/images/computer_networks/osi_tcp.png"/>
+
+# The Layers
+
+Let's discuss each of the layers of the two models. As shown in Fig1, the TCP/IP model condenses the OSI model's Application, Presentation, and Session layers into one layer labeled Application. Keep this in mind as we delve into each layer.
+
+## Application Layer (L7)
+
+<img src="/images/computer_networks/app_layer.png"/>
+
+The application layer is the closest layer to the user. It’s responsible for delivering data to applications and providing network services directly to applications. This layer dictates how users interact with the network itself.
+
+Common protocols that operate at this layer are HTTP/S, FTP (File Transfer Protocol), SMTP (Simple Mail Transfer Protocol), and DNS (Domain Name System).
+
+An example interaction with this layer could look something like typing in the URL of your favorite website. The HTTP/S protocol (which runs at the application layer) is responsible for fetching the web page from the web server.
+
+In the TCP/IP model, the Application Layer encompasses not only the OSI's Application Layer but also the Presentation and Session layers.
+
+## Presentation Layer (L6)
+
+<img src="/images/computer_networks/presentation_layer.png"/>
+
+The presentation layer is responsible for ensuring that data sent from the application layer of one system is readable by the application layer of another system. Simply, this layer handles the serialization of data. This layer is also responsible for handling data translation, encryption, and compression. Typically, it is here that data encryption/encoding and decryption/decoding take place.
+
+Common protocols that operate at this layer are Secure Sockets Layer (SSL), Transport Layer Security (TLS).
+
+An example of this layer at work is when you visit a secure website (HTTPS), the presentation layer is responsible for encrypting and decrypting the data with SSL/TLS.
+
+*Note: In the TCP/IP model, the functionality of the Presentation Layer is included within the Application Layer.*
+
+## Session Layer (L5)
+
+<img src="/images/computer_networks/session_layer.png"/>
+
+The session layer is responsible for establishing, managing, and terminating sessions between two devices. A session is defined as a time-limited two way link between two or more communication devices. This layer also manages data streams for each application/service ensuring that they do not interfere with each other. The session layer can also handle dialog control (basically is communication two way or not) and synchronization between two communicating systems. To think about synchronization, imagine a video stream where audio and video are lagging, the session layer may issue a re-synchronization request to to sync the two up.
+
+Common protocols at this layer are Remote Procedure Call Protocol (RPC), Session Control Protocol (SCP), Password Authentication Protocol (PAP).
+
+*Note: In the TCP/IP model, session management is generally handled by the Transport Layer.*
+
+## Transport Layer (L4)
+
+<img src="/images/computer_networks/transport_layer.png"/>
+
+The transport layer is responsible for…. the transportation of data between appropriate applications between devices. This layer supports reliable data delivery (TCP) or providing fast but not so reliable delivery (UDP). It can break chunks of data into smaller protocol data units called segments and then reassemble them at the destination host. This layer also deals with reliability, flow control and error handling.
+
+The most famous protocols at this layer are the Transmission Control Protocol (TCP) and User Datagram Protocol (UDP). TCP is a reliable, ordered, and connection-oriented protocol that ensures a connection is established prior to delivery. UDP is a less reliable, faster, connection-less protocol that favors speed over reliability.
+
+An example of this layer at work can be anything from sending an email with a large attachment to video streaming. Sending an email with a large attachment, TCP would ensure that the entirety of the email and its content arrive to the destination in an ordered fashion. Whereas, when you’re gaming you might be using UDP that favors the speed of transmission over the reliability of data delivery.]
+
+This layer is almost identical to the TCP/IP model’s Transport Layer. However, the TCP/IP version of this layer has additional responsibilities which are covered by the Session Layer in the OSI model.
+
+## Network Layer (L3)
+
+<img src="/images/computer_networks/network_layer.png"/>
+
+The network layer is responsible for routing data between different networks. If the Transport Layer is the vehicle the Network Layer is the GPS. It’s responsible for packet forwarding. It uses a hosts IP address to determine the best path for data delivery from source to destination. This layer supports connection-less communication, host addressing, and message forwarding. The protocol data unit at this layer is referred to as packets.
+
+The most well-known protocol that operates at this layer is the Internet Protocol (IP), for example IPv4 and IPv6 are implementations of this protocol. Additionally, Internet Protocol Security (IPsec), Routing Information Protocol (RIP), and Internet Control Message Protocol (ICMP) also operates at this layer.
+
+An example of this protocol at work would be when you visit a website, the network layer uses your IP address to send requests to the destination web server.
+
+In the TCP/IP model this layer is referred to as the Network Layer or the Internet Layer. The two are not synonymous. In the TCP/IP model the Internet layer that is referenced is only a subset of the bigger Network Layer. In the TCP/IP model the Internet layer only describes on type of network architecture… the Internet. 
+
+## Data Link Layer (L2)
+
+<img src="/images/computer_networks/datalink_layer.png"/>
+
+The data link layer is responsible for node-to-node communication on the same network. It provides the functional and procedural means to transfer data between networks. It also provides error detection and possible correction. This layer is only concerned with local delivery of frames (the protocol data unit at this layer), meaning only on the same level of the network. This means that the frames do not cross the boundaries of the local area network.
+
+This layer is actually, commonly, divided into two sub-layers: Logical Link Control (LLC) and Media Access Control (MAC). The LLC layer multiplexes the protocols running at the Data Link layer and can optionally provide flow control, error notifications, and acknowledgements. The MAC layer controls who can access the media link at any one time.
+
+Ethernet and WiFi are the most popular protocols that operate at this layer. At the LLC layer we have things like Forward Error Correction (FEC) and Automate Repeated Request (ARQ). Everyone knows examples of ARQ like Go-Back-N, Stop and Wait, and Selective Repeat. For the MAC layer we have protocols like MAC addressing, access methods like Carrier-Sense Multiple Access with Collision Detection/Avoidance (CSMA/CD and CSMA/CA), Spanning Tree Protocol (STP), and Virtual LANs
+
+In the TCP/IP model the functionality of the Data Link layer is contained in the bottom most layer, the Link Layer. In addition to the responsibilities of the Data Link Layer, the TCP/IP model’s Link layer also takes on additional responsibilities similar to the Physical Layer of the OSI model.
+
+## Physical Layer (L1)
+
+<img src="/images/computer_networks/physical_layer.png"/>
+
+The last (or first) layer of the OSI model is the Physical Layer. This layer is the lowest layer of the model meaning its most closely associated with the physical connection between devices. This layer is associated with all things electrical and mechanical regarding the connection medium.
+
+This layer defines how we transfer a stream of bits over the physical link connecting two or more nodes. You’ll find the Ethernet trans-receivers at this layer, USBs, and the physical part of WiFi (the actual radio frequency (RF) portion of things).
+
+As mentioned above the physical layer and data link layer are combined in the TCP/IP model. The TCP/IP models Link Layer handles the responsibilities of, both, the OSI models Data Link and Physical Layers.
+
+---
+
+# Wrapping Up
+
+Lets see what the above looks like altogether.
+
+<img src="/images/computer_networks/overall.png"/>
+
+I hope this deep dive into the OSI and TCP/IP models has provided a clearer understanding of how data travels across networks. Whether you're sending an email, streaming a movie, or browsing the web, these layers work together to make it happen seamlessly.
+
+Stay tuned for next week's post, where we'll explore more exciting topics in the world of technology!
+
+Catch you all next week.
+
+Ali
